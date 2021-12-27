@@ -3,14 +3,19 @@
   "version": "1.0.0",
   "description": "full ecommerce using mern",
   "main": "index.js",
-  "author": "Felipe Gouvea",
   "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/server.js",
+    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon server/server.js",
+    "prod": "SET NODE_ENV=PRODUCTION& nodemon server/server.js"
   },
+  "author": "Felipe Gouvea",
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "mongoose": "^6.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
