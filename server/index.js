@@ -4,6 +4,6 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: 'server/config/config.env' })
 
-app.listen(process.env.PORT, () => {
-  console.log('Server is running');
+app.listen(3333, () => {
+  console.log(`Server is running on localhost:3333`);
 });

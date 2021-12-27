@@ -5,9 +5,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node server/server.js",
-    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon server/server.js",
-    "prod": "SET NODE_ENV=PRODUCTION& nodemon server/server.js"
+    "start": "node server/index.js",
+    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon server/index.js",
+    "prod": "SET NODE_ENV=PRODUCTION& nodemon server/index.js"
   },
   "author": "Felipe Gouvea",
   "dependencies": {
