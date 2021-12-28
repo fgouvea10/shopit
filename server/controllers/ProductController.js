@@ -51,3 +51,20 @@ exports.updateProduct = async (request, response, next) => {
     product,
   });
 };
+
+exports.deleteProduct = async (request, response, next) => {
+  const product = await Product.findById(request.params.id);
+
+  if (!product)
+    return response.status(404).json({
+      success: false,
+      message: "Product not found",
+    });
+
+  await product.deleteOne();
+
+  response.status(200).json({
+    success: true,
+    message: "Product has been deleted",
+  });
+};
