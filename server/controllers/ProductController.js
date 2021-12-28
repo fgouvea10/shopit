@@ -9,8 +9,10 @@ exports.newProduct = async (request, response, next) => {
   });
 };
 
-exports.getProducts = (request, response, next) => {
+exports.getProducts = async (request, response, next) => {
+  const products = await Product.find();
   response.status(200).json({
     success: true,
+    products,
   });
 };
