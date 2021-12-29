@@ -17,6 +17,16 @@ module.exports = (err, request, response, next) => {
 
     error.message = err.message;
 
+    if (err.name === 'CastError') {
+      const message = `Resource not found. Invalid ${err.path}`;
+      error = new ErrorHandler(message, 400);
+    }
+
+    if (err.name === 'ValidationError') {
+      const message = Object.values(err.errors).map(value => value.message);
+      error = new ErrorHandler(message, 400);
+    }
+
     response.status(err.statusCode).json({
       success: false,
       message: err.message || "Internal server error",

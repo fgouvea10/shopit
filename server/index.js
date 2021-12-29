@@ -15,7 +15,7 @@ connectDatabase();
 
 const server = app.listen(process.env.PORT, () => {
   console.log(
-    `Server is running on ${process.env.HOST}:${process.env.PORT} at ${process.env.NODE_ENV} mode`
+    `Server is running on ${process.env.HOST}:${process.env.PORT} in ${process.env.NODE_ENV} mode`
   );
 });
 
