@@ -21,3 +21,28 @@ exports.registerUser = catchAsyncErrors(async (request, response, next) => {
     token,
   });
 });
+
+exports.loginUser = catchAsyncErrors(async (request, response, next) => {
+  const { email, password } = request.body;
+
+  if (!email || !password)
+    return next(
+      new ErrorHandler("User email or password must be provided", 400)
+    );
+
+  const user = await User.findOne({ email }).select("+password");
+
+  if (!user) return next(new ErrorHandler("Invalid email or password", 401));
+
+  const isPasswordMatched = await user.comparePassword(password);
+
+  if (!isPasswordMatched)
+    return next(new ErrorHandler("Invalid email or password", 401));
+
+  const token = user.getJwtToken();
+
+  response.status(200).json({
+    success: true,
+    token,
+  });
+});
