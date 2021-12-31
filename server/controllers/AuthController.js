@@ -37,3 +37,15 @@ exports.loginUser = catchAsyncErrors(async (request, response, next) => {
 
   sendToken(user, 200, response);
 });
+
+exports.logoutUser = catchAsyncErrors(async (request, response, next) => {
+  response.cookie("token", null, {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  });
+
+  response.status(200).json({
+    success: true,
+    message: "Logged out",
+  });
+});

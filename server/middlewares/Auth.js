@@ -8,7 +8,7 @@ exports.isAuthenticated = CatchAsyncErrors(async (request, response, next) => {
 
   if (!token)
     return next(
-      new ErrorHandler("You need to login first to access this resource", 401)
+      new ErrorHandler("You need to login to access this resource", 401)
     );
 
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
