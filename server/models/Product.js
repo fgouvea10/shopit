@@ -1,20 +1,20 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Product name must be provided'],
+    required: [true, "Product name must be provided"],
     trim: true,
-    maxlength: [100, 'Product name cannot exceed 100 characters']
+    maxlength: [100, "Product name cannot exceed 100 characters"],
   },
   price: {
     type: Number,
-    required: [true, 'Product price must be provided'],
-    maxlength: [5, 'Product price cannot exceed 5 characters']
+    required: [true, "Product price must be provided"],
+    maxlength: [5, "Product price cannot exceed 5 characters"],
   },
   description: {
     type: String,
-    required: [true, 'Product description must be provided'],
+    required: [true, "Product description must be provided"],
   },
   ratings: {
     type: Number,
@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema({
     {
       public_id: {
         type: String,
-        required: true
+        required: true,
       },
       url: {
         type: String,
@@ -34,33 +34,33 @@ const productSchema = new mongoose.Schema({
   ],
   category: {
     type: String,
-    required: [true, 'Product category must be provided'],
+    required: [true, "Product category must be provided"],
     enum: {
       values: [
-        'Electronics',
-        'Cameras',
-        'Laptop',
-        'Accessories',
-        'Headphones',
-        'Food',
-        'Books',
-        'Clothes/Shoes',
-        'Beauty/Healthy',
-        'Sports',
-        'Outdoor',
-        'Home',
+        "Electronics",
+        "Cameras",
+        "Laptop",
+        "Accessories",
+        "Headphones",
+        "Food",
+        "Books",
+        "Clothes/Shoes",
+        "Beauty/Healthy",
+        "Sports",
+        "Outdoor",
+        "Home",
       ],
-      message: 'Product category must be provided'
+      message: "Product category must be provided",
     },
   },
   seller: {
     type: String,
-    required: [true, 'Product seller must be provided'],
+    required: [true, "Product seller must be provided"],
   },
   stock: {
     type: Number,
-    required: [true, 'Product stock must be provided'],
-    maxlength: [5, 'Product stock cannot exceed 5 characters'],
+    required: [true, "Product stock must be provided"],
+    maxlength: [5, "Product stock cannot exceed 5 characters"],
     default: 0,
   },
   numOfReviews: {
@@ -83,10 +83,15 @@ const productSchema = new mongoose.Schema({
       },
     },
   ],
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: true,
+  },
   created_at: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model("Product", productSchema);
