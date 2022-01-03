@@ -129,6 +129,23 @@ exports.updatePassword = catchAsyncErrors(async (request, response, next) => {
   sendToken(user, 200, response);
 });
 
+exports.updateProfile = catchAsyncErrors(async (request, response, next) => {
+  const newUserData = {
+    name: request.body.name,
+    email: request.body.email,
+  };
+
+  const user = await User.findByIdAndUpdate(request.user.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  response.status(200).json({
+    success: true,
+  });
+});
+
 exports.logoutUser = catchAsyncErrors(async (request, response, next) => {
   response.cookie("token", null, {
     expires: new Date(Date.now()),
