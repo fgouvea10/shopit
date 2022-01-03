@@ -55,3 +55,18 @@ exports.myOrders = catchAsyncErrors(async (request, response, next) => {
   });
 });
 
+exports.allOrders = catchAsyncErrors(async (request, response, next) => {
+  const orders = await Order.find();
+
+  let totalAmount = 0;
+
+  orders.forEach((order) => {
+    totalAmount += order.totalPrice;
+  });
+
+  response.status(200).json({
+    success: true,
+    totalAmount,
+    orders,
+  });
+});
