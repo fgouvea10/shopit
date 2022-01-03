@@ -157,3 +157,26 @@ exports.logoutUser = catchAsyncErrors(async (request, response, next) => {
     message: "Logged out",
   });
 });
+
+exports.allUsers = catchAsyncErrors(async (request, response, next) => {
+  const users = await User.find();
+
+  response.status(200).json({
+    success: true,
+    users,
+  });
+});
+
+exports.getUserDetails = catchAsyncErrors(async (request, response, next) => {
+  const user = await User.findById(request.params.id);
+
+  if (!user)
+    return next(
+      new ErrorHandler(`User not found with id ${request.params.id}`)
+    );
+
+  response.status(200).json({
+    success: true,
+    user,
+  });
+});
