@@ -110,3 +110,14 @@ exports.createProductReview = catchAsyncErrors(
     });
   }
 );
+
+exports.getProductReviews = catchAsyncErrors(
+  async (request, response, next) => {
+    const product = await Product.findById(request.query.id);
+
+    response.status(200).json({
+      success: true,
+      reviews: product.reviews,
+    });
+  }
+);
