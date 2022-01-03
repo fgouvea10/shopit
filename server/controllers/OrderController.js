@@ -31,3 +31,27 @@ exports.newOrder = catchAsyncErrors(async (request, response, next) => {
     order,
   });
 });
+
+exports.getSingleOrder = catchAsyncErrors(async (request, response, next) => {
+  const order = await Order.findById(request.params.id).populate(
+    "user",
+    "name email"
+  );
+
+  if (!order) return next(new ErrorHandler("No order found with this id", 404));
+
+  response.status(200).json({
+    success: true,
+    order,
+  });
+});
+
+exports.myOrders = catchAsyncErrors(async (request, response, next) => {
+  const orders = await Order.find({ user: request.user.id });
+
+  response.status(200).json({
+    success: true,
+    orders,
+  });
+});
+
