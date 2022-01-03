@@ -180,3 +180,21 @@ exports.getUserDetails = catchAsyncErrors(async (request, response, next) => {
     user,
   });
 });
+
+exports.updateUser = catchAsyncErrors(async (request, response, next) => {
+  const newUserData = {
+    name: request.body.name,
+    email: request.body.email,
+    role: request.body.role,
+  };
+
+  const user = await User.findByIdAndUpdate(request.params.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  response.status(200).json({
+    success: true,
+  });
+});
