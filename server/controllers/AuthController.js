@@ -3,7 +3,7 @@ const User = require("../models/User");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/CatchAsyncErrors");
 const sendToken = require("../utils/jwtToken");
-const sendEmail = require("../utils/sendEmail");
+// const user = require("../utils/user");
 
 exports.registerUser = catchAsyncErrors(async (request, response, next) => {
   const { name, email, password } = request.body;
@@ -57,7 +57,7 @@ exports.forgotPassword = catchAsyncErrors(async (request, response, next) => {
   const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it`;
 
   try {
-    await sendEmail({
+    await user({
       email: user.email,
       subject: "ShopIT Password Recovery",
       message,
@@ -113,6 +113,20 @@ exports.getUserProfile = catchAsyncErrors(async (request, response, next) => {
     success: true,
     user,
   });
+});
+
+exports.updatePassword = catchAsyncErrors(async (request, response, next) => {
+  const user = await User.findById(request.user.id).select("+password");
+
+  const isMatched = await user.comparePassword(request.body.oldPassword);
+
+  if (!isMatched)
+    return next(new ErrorHandler("Old password is incorrect", 400));
+
+  user.password = request.body.password;
+  await user.save();
+
+  sendToken(user, 200, response);
 });
 
 exports.logoutUser = catchAsyncErrors(async (request, response, next) => {
