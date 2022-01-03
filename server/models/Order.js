@@ -32,19 +32,19 @@ const orderSchema = mongoose.Schema({
     {
       name: {
         type: String,
-        type: true,
+        required: true,
       },
       quantity: {
         type: Number,
-        type: true,
+        required: true,
       },
       image: {
         type: String,
-        type: true,
+        required: true,
       },
       price: {
         type: Number,
-        type: true,
+        required: true,
       },
       product: {
         type: mongoose.Schema.Types.ObjectId,
@@ -72,12 +72,12 @@ const orderSchema = mongoose.Schema({
   taxPrice: {
     type: Number,
     required: true,
-    defautlt: 0.0,
+    default: 0.0,
   },
   shippingPrice: {
     type: Number,
     required: true,
-    defautlt: 0.0,
+    default: 0.0,
   },
   totalPrice: {
     type: Number,
