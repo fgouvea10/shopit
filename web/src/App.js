@@ -1,17 +1,25 @@
-import React from 'react';
-import './styles/global.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Header from './components/Header';
-import Home from './components/Home';
-import Footer from './components/Footer';
+import "./styles/global.css";
+
+import Header from "./components/Header";
+import Home from "./components/Home";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Home />
-      <Footer />
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <div className="container container-fluid">
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
