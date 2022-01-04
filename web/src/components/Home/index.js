@@ -1,8 +1,10 @@
 import React from "react";
+import MetaData from "../MetaData";
 
 function Home() {
   return (
     <>
+    <MetaData title="Buy best products online" />
       <h1 id="products_heading">Latest Products</h1>
 
       <section id="products" className="container mt-5">
