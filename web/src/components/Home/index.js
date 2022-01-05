@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import MetaData from "../MetaData";
+import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
+
 import { getProducts } from "../../actions/productActions";
 import ProductCard from "../Products/ProductCard";
 
@@ -17,7 +18,9 @@ function Home() {
 
   return (
     <>
-      <MetaData title="Buy best products online" />
+      <Helmet>
+        <title>Buy best products online - ShopIT</title>
+      </Helmet>
       {(loading && <h1>Loading...</h1>) || (
         <>
           <h1 id="products_heading">Latest Products</h1>
