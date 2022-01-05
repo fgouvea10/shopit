@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from "react-alert";
 
 import { getProducts } from "../../actions/productActions";
 import Loader from "../Loader";
@@ -8,14 +9,18 @@ import ProductCard from "../Products/ProductCard";
 
 function Home() {
   const dispatch = useDispatch();
+  const alert = useAlert();
 
   const { loading, products, error, productsCount } = useSelector(
     (state) => state.products
   );
 
   useEffect(() => {
+    if (error) return alert.error(error);
+    
     dispatch(getProducts());
-  }, [dispatch]);
+
+  }, [dispatch, alert, error]);
 
   return (
     <>
