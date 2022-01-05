@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getProducts } from "../../actions/productActions";
+import Loader from "../Loader";
 import ProductCard from "../Products/ProductCard";
 
 function Home() {
@@ -21,7 +22,7 @@ function Home() {
       <Helmet>
         <title>Buy best products online - ShopIT</title>
       </Helmet>
-      {(loading && <h1>Loading...</h1>) || (
+      {(loading && <Loader />) || (
         <>
           <h1 id="products_heading">Latest Products</h1>
 
