@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Search from "../Search";
 
 function Header() {
@@ -21,7 +21,9 @@ function Header() {
     <nav className="navbar row">
       <div className="col-12 col-md-3">
         <div className="navbar-brand">
-          <img src="./assets/logo.png" />
+          <Link to="/">
+            <img src="./assets/logo.png" />
+          </Link>
         </div>
       </div>
 
