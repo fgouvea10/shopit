@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import Pagination from "react-js-pagination";
+import { useParams } from "react-router-dom";
 
 import { getProducts } from "../../actions/productActions";
 import Loader from "../Loader";
@@ -13,10 +14,13 @@ function Home() {
 
   const dispatch = useDispatch();
   const alert = useAlert();
+  const params = useParams();
 
   const { loading, products, error, productsCount, resPerPage } = useSelector(
     (state) => state.products
   );
+
+  const keyword = params.keyword;
 
   const setCurrentPageNo = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -25,8 +29,8 @@ function Home() {
   useEffect(() => {
     if (error) return alert.error(error);
 
-    dispatch(getProducts(currentPage));
-  }, [dispatch, alert, error, currentPage]);
+    dispatch(getProducts(keyword, currentPage));
+  }, [dispatch, alert, error, keyword, currentPage]);
 
   return (
     <>

@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Search from "../Search";
 
 function Header() {
+  const [keyword, setKeyword] = useState("");
+
+  const navigate = useNavigate();
+
+  const searchHandler = (event) => {
+    event.preventDefault();
+
+    if (keyword.trim()) {
+      navigate(`/search/${keyword}`);
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
     <nav className="navbar row">
       <div className="col-12 col-md-3">
@@ -10,19 +26,10 @@ function Header() {
       </div>
 
       <div className="col-12 col-md-6 mt-2 mt-md-0">
-        <div className="input-group">
-          <input
-            type="text"
-            id="search_field"
-            className="form-control"
-            placeholder="Enter Product Name ..."
-          />
-          <div className="input-group-append">
-            <button id="search_btn" className="btn">
-              <i className="fa fa-search" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
+        <Search
+          onChange={(event) => setKeyword(event.target.value)}
+          onSubmit={searchHandler}
+        />
       </div>
 
       <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
