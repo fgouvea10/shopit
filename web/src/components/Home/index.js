@@ -16,12 +16,28 @@ const Range = createSliderWithTooltip(Slider.Range);
 function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([1, 1000]);
+  const [category, setCategory] = useState("");
+
+  const categories = [
+    "Electronics",
+    "Cameras",
+    "Laptop",
+    "Accessories",
+    "Headphones",
+    "Food",
+    "Books",
+    "Clothes/Shoes",
+    "Beauty/Healthy",
+    "Sports",
+    "Outdoor",
+    "Home",
+  ];
 
   const dispatch = useDispatch();
   const alert = useAlert();
   const params = useParams();
 
-  const { loading, products, error, productsCount, resPerPage } = useSelector(
+  const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(
     (state) => state.products
   );
 
@@ -31,11 +47,17 @@ function Home() {
     setCurrentPage(pageNumber);
   };
 
+  let count = productsCount;
+
+  if (keyword) {
+    count = filteredProductsCount;
+  }
+
   useEffect(() => {
     if (error) return alert.error(error);
 
-    dispatch(getProducts(keyword, currentPage, price));
-  }, [dispatch, alert, error, keyword, currentPage, price]);
+    dispatch(getProducts(keyword, currentPage, price, category));
+  }, [dispatch, alert, error, keyword, currentPage, price, category]);
 
   return (
     <>
@@ -68,6 +90,25 @@ function Home() {
                         value={price}
                         onChange={(price) => setPrice(price)}
                       />
+
+                      <hr className="my-5" />
+                      <div className="mt-5">
+                        <h4 className="mb-3">Categories</h4>
+                        <ul className="pl-0">
+                          {categories.map((category, index) => (
+                            <li
+                              key={index + 1}
+                              style={{
+                                cursor: "pointer",
+                                listStyleType: "none",
+                              }}
+                              onClick={() => setCategory(category)}
+                            >
+                              {category}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
 
@@ -75,7 +116,11 @@ function Home() {
                     <div className="row">
                       {products &&
                         products.map((product) => (
-                          <ProductCard key={product._id} data={product} col={4} />
+                          <ProductCard
+                            key={product._id}
+                            data={product}
+                            col={4}
+                          />
                         ))}
                     </div>
                   </div>
@@ -88,7 +133,7 @@ function Home() {
             </div>
           </section>
 
-          {resPerPage <= productsCount && (
+          {resPerPage <= count && (
             <div className="d-flex justify-content-center mt-5">
               <Pagination
                 activePage={currentPage}
