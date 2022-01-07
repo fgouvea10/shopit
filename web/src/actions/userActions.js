@@ -31,3 +31,9 @@ export const login = (email, password) => async (dispatch) => {
     });
   }
 };
+
+export const clearErrors = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_ERRORS,
+  });
+};
