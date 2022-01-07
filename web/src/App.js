@@ -9,6 +9,7 @@ import ProductDetails from "./components/Products/ProductDetails";
 
 import "./styles/global.css";
 import "rc-slider/assets/index.css";
+import SignIn from "./components/SignIn";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/search/:keyword" element={<Home />} />
             <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/login" element={<SignIn />} />
           </Routes>
         </div>
         <Footer />
