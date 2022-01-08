@@ -1,18 +1,25 @@
 const crypto = require("crypto");
+const cloudinary = require("cloudinary");
 const User = require("../models/User");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/CatchAsyncErrors");
 const sendToken = require("../utils/jwtToken");
 
 exports.registerUser = catchAsyncErrors(async (request, response, next) => {
+  const result = await cloudinary.v2.uploader.upload(request.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
+
   const { name, email, password } = request.body;
   const user = await User.create({
     name,
     email,
     password,
     avatar: {
-      public_id: "avatars/kuhbasfbnkasikl",
-      url: "https://villyo.com.br/assets/img/user.png",
+      public_id: result.public_id,
+      url: result.secure_url,
     },
   });
 
