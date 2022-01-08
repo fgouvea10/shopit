@@ -3,13 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 import Loader from "../Loader";
 import { login, clearErrors } from "../../actions/userActions";
+import "./styles.css";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const alert = useAlert();
   const dispatch = useDispatch();
@@ -51,6 +54,7 @@ function SignIn() {
                   <label htmlFor="email_field">Email</label>
                   <input
                     type="email"
+                    placeholder="john@example.com"
                     id="email_field"
                     className="form-control"
                     value={email}
@@ -58,15 +62,26 @@ function SignIn() {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group password-field">
                   <label htmlFor="password_field">Password</label>
-                  <input
-                    type="password"
-                    id="password_field"
-                    className="form-control"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                  />
+                  <div className="button-password">
+                    <input
+                      type={(showPassword && "text") || "password"}
+                      placeholder="your password"
+                      id="password_field"
+                      className="form-control"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {(showPassword && (
+                        <BsEyeSlash size={20} color="#000" />
+                      )) || <BsEye size={20} color="#000" />}
+                    </button>
+                  </div>
                 </div>
 
                 <Link to="/password/forgot" className="float-right mb-4">
