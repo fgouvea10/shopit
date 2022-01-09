@@ -9,8 +9,9 @@ import ProductDetails from "./components/Products/ProductDetails";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import UserProfile from "./components/UserProfile";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
-import store from './store';
+import store from "./store";
 
 import "./styles/global.css";
 import "rc-slider/assets/index.css";
@@ -31,7 +32,14 @@ function App() {
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/login" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
-            <Route path="/me" element={<UserProfile />} />
+            <Route
+              path="/me"
+              element={
+                <ProtectedRoute>
+                  <UserProfile />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </div>
         <Footer />
