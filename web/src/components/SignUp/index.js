@@ -48,7 +48,7 @@ function SignUp() {
       reader.onload = () => {
         if (reader.readyState === 2) {
           setAvatarPreview(reader.result);
-          setAvatar(avatarPreview);
+          setAvatar(reader.result);
         }
       };
 
