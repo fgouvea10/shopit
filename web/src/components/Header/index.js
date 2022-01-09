@@ -77,7 +77,7 @@ function Header() {
             </Link>
             <div
               className="dropdown-menu"
-              aria-aria-labelledby="dropDownMenuButton"
+              aria-labelledby="dropDownMenuButton"
             >
               {(user && user.role !== "admin" && (
                 <Link className="dropdown-item" to="/orders/me">
@@ -88,7 +88,7 @@ function Header() {
                   Admin Dashboard
                 </Link>
               )}
-              <Link className="dropdown-item" to="/dashboard">
+              <Link className="dropdown-item" to="/me">
                 Profile
               </Link>
               <Link to="/" className="dropdown-item text-danger" onClick={handleLogout}>

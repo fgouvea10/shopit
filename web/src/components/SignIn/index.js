@@ -33,7 +33,7 @@ function SignIn() {
     }
 
     if (error) {
-      alert.alert(error);
+      console.log(error);
       dispatch(clearErrors());
     }
   }, [dispatch, alert, isAuthenticated, error]);

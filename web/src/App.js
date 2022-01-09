@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import ProductDetails from "./components/Products/ProductDetails";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
+import UserProfile from "./components/UserProfile";
 import { loadUser } from "./actions/userActions";
 import store from './store';
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/login" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
+            <Route path="/me" element={<UserProfile />} />
           </Routes>
         </div>
         <Footer />
