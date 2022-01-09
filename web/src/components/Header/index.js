@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 
 import Search from "../Search";
+import { logout } from "../../actions/userActions";
 
 function Header() {
   const [keyword, setKeyword] = useState("");
@@ -13,6 +14,10 @@ function Header() {
   const dispatch = useDispatch();
 
   const { user, loading } = useSelector((state) => state.auth);
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   const searchHandler = (event) => {
     event.preventDefault();
@@ -74,13 +79,19 @@ function Header() {
               className="dropdown-menu"
               aria-aria-labelledby="dropDownMenuButton"
             >
-              {user && user.role !== 'admin' && (
-                <Link className="dropdown-item" to="/orders/me">Orders</Link>
-              ) || (
-                <Link className="dropdown-item" to="/dashboard">Admin Dashboard</Link>
+              {(user && user.role !== "admin" && (
+                <Link className="dropdown-item" to="/orders/me">
+                  Orders
+                </Link>
+              )) || (
+                <Link className="dropdown-item" to="/dashboard">
+                  Admin Dashboard
+                </Link>
               )}
-              <Link className="dropdown-item" to="/dashboard">Profile</Link>
-              <Link to="/" className="dropdown-item text-danger">
+              <Link className="dropdown-item" to="/dashboard">
+                Profile
+              </Link>
+              <Link to="/" className="dropdown-item text-danger" onClick={handleLogout}>
                 Logout
               </Link>
             </div>
