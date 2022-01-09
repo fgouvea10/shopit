@@ -43,7 +43,7 @@ function UserProfile() {
               <p>{user.email}</p>
 
               <h4>Joined On</h4>
-              <p>{String(user.createdAt).substring(0, 10)}</p>
+              <p>{String(user.created_at).substring(0, 10)}</p>
 
               {user.role !== "admin" && (
                 <Link to="/orders/me" className="btn btn-danger btn-block mt-5">
