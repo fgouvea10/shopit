@@ -9,6 +9,7 @@ import ProductDetails from "./components/Products/ProductDetails";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import UserProfile from "./components/UserProfile";
+import UpdateUser from "./components/UpdateUser";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
 import store from "./store";
@@ -37,6 +38,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <UserProfile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/me/update"
+              element={
+                <ProtectedRoute>
+                  <UpdateUser />
                 </ProtectedRoute>
               }
             />
