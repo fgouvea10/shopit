@@ -96,8 +96,16 @@ function SignIn() {
                   LOGIN
                 </button>
 
-                <Link to="/register" className="float-right mt-3">
-                  New User?
+                <Link
+                  to="/register"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    paddingTop: "1rem",
+                  }}
+                >
+                  New user? Sign up
                 </Link>
               </form>
             </div>

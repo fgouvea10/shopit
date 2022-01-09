@@ -124,13 +124,17 @@ function SignUp() {
                     value={password}
                     onChange={onChange}
                   />
-                  <button
-                    className="float-right mb-4"
-                    style={{ border: "none", background: "transparent" }}
+                  <div
+                    className="float-right"
+                    style={{
+                      border: "none",
+                      background: "transparent",
+                      cursor: "pointer",
+                    }}
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {(showPassword && "Hide password") || "Show password"}
-                  </button>
+                  </div>
                 </div>
 
                 <div className="form-group" style={{ paddingTop: "10px" }}>
@@ -169,6 +173,17 @@ function SignUp() {
                 >
                   REGISTER
                 </button>
+                <Link
+                  to="/login"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    paddingTop: "1rem",
+                  }}
+                >
+                  Already user? Sign in
+                </Link>
               </form>
             </div>
           </div>
