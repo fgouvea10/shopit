@@ -11,6 +11,7 @@ import SignUp from "./components/SignUp";
 import UserProfile from "./components/UserProfile";
 import UpdateUser from "./components/UpdateUser";
 import UpdatePassword from "./components/UpdatePassword";
+import ForgotPassword from "./components/ForgotPassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
 import store from "./store";
@@ -58,6 +59,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/password/forgot" element={<ForgotPassword />} />
           </Routes>
         </div>
         <Footer />
