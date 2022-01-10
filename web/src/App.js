@@ -10,6 +10,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import UserProfile from "./components/UserProfile";
 import UpdateUser from "./components/UpdateUser";
+import UpdatePassword from "./components/UpdatePassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
 import store from "./store";
@@ -46,6 +47,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <UpdateUser />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/password/update"
+              element={
+                <ProtectedRoute>
+                  <UpdatePassword />
                 </ProtectedRoute>
               }
             />
