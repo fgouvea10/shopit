@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
-import { useNavigate } from "react-router-dom";
 
 import { forgotPassword, clearErrors } from "../../actions/userActions";
 
@@ -9,7 +8,6 @@ function ForgotPassword() {
   const [email, setEmail] = useState("");
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { error, message, loading } = useSelector(
     (state) => state.forgotPassword

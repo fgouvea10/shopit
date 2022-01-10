@@ -12,6 +12,7 @@ import UserProfile from "./components/UserProfile";
 import UpdateUser from "./components/UpdateUser";
 import UpdatePassword from "./components/UpdatePassword";
 import ForgotPassword from "./components/ForgotPassword";
+import NewPassword from "./components/NewPassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
 import store from "./store";
@@ -60,6 +61,7 @@ function App() {
               }
             />
             <Route path="/password/forgot" element={<ForgotPassword />} />
+            <Route path="/password/reset/:token" element={<NewPassword />} />
           </Routes>
         </div>
         <Footer />

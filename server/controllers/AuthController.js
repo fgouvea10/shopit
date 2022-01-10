@@ -4,6 +4,7 @@ const User = require("../models/User");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/CatchAsyncErrors");
 const sendToken = require("../utils/jwtToken");
+const sendEmail = require("../utils/sendEmail");
 
 exports.registerUser = catchAsyncErrors(async (request, response, next) => {
   const result = await cloudinary.v2.uploader.upload(request.body.avatar, {
@@ -56,14 +57,12 @@ exports.forgotPassword = catchAsyncErrors(async (request, response, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetUrl = `${request.protocol}:://${request.get(
-    "host"
-  )}/api/v1/password/reset/${resetToken}`;
+  const resetUrl = `${process.env.WEB_URL}/password/reset/${resetToken}`;
 
   const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it`;
 
   try {
-    await user({
+    await sendEmail({
       email: user.email,
       subject: "ShopIT Password Recovery",
       message,
