@@ -3,11 +3,15 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addItemToCart } from "../../actions/cartActions";
+import { addItemToCart, removeItemFromCart } from "../../actions/cartActions";
 
 function Cart() {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
+
+  const handleRemoveItemFromCart = (id) => {
+    dispatch(removeItemFromCart(id));
+  };
 
   const increaseQty = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -48,7 +52,7 @@ function Cart() {
               {cartItems.map((item) => (
                 <>
                   <hr />
-                  <div className="cart-item">
+                  <div className="cart-item" key={item.product}>
                     <div className="row">
                       <div className="col-4 col-lg-3">
                         <img
@@ -103,6 +107,7 @@ function Cart() {
 
                       <div className="col-4 col-lg-1 mt-4 mt-lg-0">
                         <i
+                          onClick={() => handleRemoveItemFromCart(item.product)}
                           id="delete_cart_item"
                           className="fa fa-trash btn btn-danger"
                         ></i>
