@@ -20,6 +20,7 @@ import store from "./store";
 
 import "./styles/global.css";
 import "rc-slider/assets/index.css";
+import Shipping from "./components/Cart/Shipping";
 
 function App() {
   useEffect(() => {
@@ -64,6 +65,14 @@ function App() {
             <Route path="/password/forgot" element={<ForgotPassword />} />
             <Route path="/password/reset/:token" element={<NewPassword />} />
             <Route path="/cart" element={<Cart />} />
+            <Route
+              path="/shipping"
+              element={
+                <ProtectedRoute>
+                  <Shipping />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </div>
         <Footer />
