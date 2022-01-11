@@ -10,6 +10,7 @@ import {
   clearErrors,
 } from "../../../actions/productActions";
 import Loader from "../../Loader";
+import { addItemToCart } from "../../../actions/cartActions";
 
 function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
@@ -22,23 +23,28 @@ function ProductDetails() {
     (state) => state.productDetails
   );
 
-  const increaseQty = () => {
-    const count = document.querySelector('.count');
-
-    if (count.valueAsNumber >= product.stock) return;
-    
-    const quant = count.valueAsNumber + 1;
-    setQuantity(quant);
+  const addToCart = () => {
+    dispatch(addItemToCart(params.id, quantity));
+    console.log('item added to cart successfully');
   }
 
+  const increaseQty = () => {
+    const count = document.querySelector(".count");
+
+    if (count.valueAsNumber >= product.stock) return;
+
+    const quant = count.valueAsNumber + 1;
+    setQuantity(quant);
+  };
+
   const decreaseQty = () => {
-    const count = document.querySelector('.count');
+    const count = document.querySelector(".count");
 
     if (count.valueAsNumber <= 1) return;
 
     const quant = count.valueAsNumber - 1;
     setQuantity(quant);
-  }
+  };
 
   useEffect(() => {
     dispatch(getProductsDetails(params.id));
@@ -91,7 +97,9 @@ function ProductDetails() {
 
               <p id="product_price">${product.price}</p>
               <div className="stockCounter d-inline">
-                <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
+                <span className="btn btn-danger minus" onClick={decreaseQty}>
+                  -
+                </span>
 
                 <input
                   type="number"
@@ -100,12 +108,16 @@ function ProductDetails() {
                   readOnly
                 />
 
-                <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
+                <span className="btn btn-primary plus" onClick={increaseQty}>
+                  +
+                </span>
               </div>
               <button
                 type="button"
                 id="cart_btn"
                 className="btn btn-primary d-inline ml-4"
+                onClick={addToCart}
+                disabled={product.stock === 0}
               >
                 Add to Cart
               </button>
