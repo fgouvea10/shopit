@@ -16,7 +16,7 @@ export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
     },
   });
 
-  localStorage.getItem(
+  localStorage.setItem(
     "@shopit:cartItems",
     JSON.stringify(getState().cart.cartItems)
   );
