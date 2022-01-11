@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
@@ -12,6 +12,8 @@ import {
 import Loader from "../../Loader";
 
 function ProductDetails() {
+  const [quantity, setQuantity] = useState(1);
+
   const dispatch = useDispatch();
   const alert = useAlert();
   const params = useParams();
@@ -19,6 +21,24 @@ function ProductDetails() {
   const { loading, error, product } = useSelector(
     (state) => state.productDetails
   );
+
+  const increaseQty = () => {
+    const count = document.querySelector('.count');
+
+    if (count.valueAsNumber >= product.stock) return;
+    
+    const quant = count.valueAsNumber + 1;
+    setQuantity(quant);
+  }
+
+  const decreaseQty = () => {
+    const count = document.querySelector('.count');
+
+    if (count.valueAsNumber <= 1) return;
+
+    const quant = count.valueAsNumber - 1;
+    setQuantity(quant);
+  }
 
   useEffect(() => {
     dispatch(getProductsDetails(params.id));
@@ -71,16 +91,16 @@ function ProductDetails() {
 
               <p id="product_price">${product.price}</p>
               <div className="stockCounter d-inline">
-                <span className="btn btn-danger minus">-</span>
+                <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
 
                 <input
                   type="number"
                   className="form-control count d-inline"
-                  value="1"
+                  value={quantity}
                   readOnly
                 />
 
-                <span className="btn btn-primary plus">+</span>
+                <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
               </div>
               <button
                 type="button"
