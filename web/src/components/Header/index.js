@@ -14,6 +14,7 @@ function Header() {
   const dispatch = useDispatch();
 
   const { user, loading } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -52,7 +53,7 @@ function Header() {
             Cart
           </span>
           <span className="ml-1" id="cart_count">
-            2
+            {(cartItems.length > 0 && cartItems.length) || ""}
           </span>
         </Link>
         {(user && (
@@ -75,10 +76,7 @@ function Header() {
               </figure>
               <span>{user && user.name}</span>
             </Link>
-            <div
-              className="dropdown-menu"
-              aria-labelledby="dropDownMenuButton"
-            >
+            <div className="dropdown-menu" aria-labelledby="dropDownMenuButton">
               {(user && user.role !== "admin" && (
                 <Link className="dropdown-item" to="/orders/me">
                   Orders
@@ -91,7 +89,11 @@ function Header() {
               <Link className="dropdown-item" to="/me">
                 Profile
               </Link>
-              <Link to="/" className="dropdown-item text-danger" onClick={handleLogout}>
+              <Link
+                to="/"
+                className="dropdown-item text-danger"
+                onClick={handleLogout}
+              >
                 Logout
               </Link>
             </div>
