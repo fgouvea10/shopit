@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -6,7 +7,24 @@ import { saveShippingInfo } from "../../actions/cartActions";
 
 function Shipping() {
   const { shippingInfo } = useSelector((state) => state.cart);
-  const [adress, setAdress] = useState("");
+  console.log("shippingInfo", shippingInfo);
+  const [address, setAddress] = useState(shippingInfo.address);
+  const [city, setCity] = useState(shippingInfo.city);
+  const [postalCode, setPostalCode] = useState(shippingInfo.postalCode);
+  const [phoneNumber, setPhoneNumber] = useState(shippingInfo.phoneNumber);
+  const [country, setCountry] = useState(shippingInfo.country);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    dispatch(
+      saveShippingInfo({ address, city, postalCode, phoneNumber, country })
+    );
+    navigate("/confirm");
+  };
 
   return (
     <>
@@ -16,7 +34,7 @@ function Shipping() {
 
       <div className="row wrapper">
         <div className="col-10 col-lg-5">
-          <form className="shadow-lg">
+          <form className="shadow-lg" onSubmit={handleSubmit}>
             <h1 className="mb-4">Shipping Info</h1>
             <div className="form-group">
               <label htmlFor="address_field">Address</label>
@@ -64,12 +82,21 @@ function Shipping() {
 
             <div className="form-group">
               <label htmlFor="country_field">Country</label>
-              <select id="country_field" className="form-control" value="" required>
+              <select
+                id="country_field"
+                className="form-control"
+                value=""
+                required
+              >
                 <option>USA</option>
               </select>
             </div>
 
-            <button id="shipping_btn" type="submit" className="btn btn-block py-3">
+            <button
+              id="shipping_btn"
+              type="submit"
+              className="btn btn-block py-3"
+            >
               CONTINUE
             </button>
           </form>
