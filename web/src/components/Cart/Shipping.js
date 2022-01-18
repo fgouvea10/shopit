@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { countries } from "countries-list";
 
 import { saveShippingInfo } from "../../actions/cartActions";
+import Steps from "../Steps";
 
 function Shipping() {
   const { shippingInfo } = useSelector((state) => state.cart);
@@ -35,6 +36,7 @@ function Shipping() {
         <title>Shipping info - ShopIT</title>
       </Helmet>
 
+      <Steps shipping />
       <div className="row wrapper">
         <div className="col-10 col-lg-5">
           <form className="shadow-lg" onSubmit={handleSubmit}>
