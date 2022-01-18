@@ -27,10 +27,10 @@ let initialState = {
     cartItems: localStorage.getItem("@shopit:cartItems")
       ? JSON.parse(localStorage.getItem("@shopit:cartItems"))
       : [],
+    shippingInfo: localStorage.getItem("@shopit:shippingInfo")
+      ? JSON.parse(localStorage.getItem("@shopit:shippingInfo"))
+      : {},
   },
-  shippingInfo: localStorage.getItem("@shopit:shippingInfo")
-    ? JSON.parse(localStorage.getItem("@shopit:shippingInfo"))
-    : {},
 };
 
 const middleware = [thunk];

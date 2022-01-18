@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -7,6 +7,7 @@ import { addItemToCart, removeItemFromCart } from "../../actions/cartActions";
 
 function Cart() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
 
   const handleRemoveItemFromCart = (id) => {
@@ -27,6 +28,10 @@ function Cart() {
     if (newQty <= 1) return;
 
     dispatch(addItemToCart(id, newQty));
+  };
+
+  const handleCheckout = () => {
+    navigate("/login?redirect=shipping");
   };
 
   return (
@@ -137,15 +142,22 @@ function Cart() {
                   Est. total:{" "}
                   <span className="order-summary-values">
                     $
-                    {cartItems.reduce(
-                      (acc, item) => acc + item.quantity * item.price,
-                      0
-                    ).toFixed(2)}
+                    {cartItems
+                      .reduce(
+                        (acc, item) => acc + item.quantity * item.price,
+                        0
+                      )
+                      .toFixed(2)}
                   </span>
                 </p>
 
                 <hr />
-                <button id="checkout_btn" className="btn btn-primary btn-block">
+                <button
+                  id="checkout_btn"
+                  className="btn btn-primary btn-block"
+                  onClick={handleCheckout}
+                  // onClick={() => navigate('/confirm')}
+                >
                   Check out
                 </button>
               </div>
