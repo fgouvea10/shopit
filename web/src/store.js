@@ -28,6 +28,9 @@ let initialState = {
       ? JSON.parse(localStorage.getItem("@shopit:cartItems"))
       : [],
   },
+  shippingInfo: localStorage.getItem("@shopit:shippingInfo")
+    ? JSON.parse(localStorage.getItem("@shopit:shippingInfo"))
+    : {},
 };
 
 const middleware = [thunk];
