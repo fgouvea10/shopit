@@ -21,6 +21,7 @@ import store from "./store";
 import "./styles/global.css";
 import "rc-slider/assets/index.css";
 import Shipping from "./components/Cart/Shipping";
+import ConfirmOrder from "./components/Cart/ConfirmOrder";
 
 function App() {
   useEffect(() => {
@@ -70,6 +71,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Shipping />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/order/confirm"
+              element={
+                <ProtectedRoute>
+                  <ConfirmOrder />
                 </ProtectedRoute>
               }
             />

@@ -27,7 +27,7 @@ function Shipping() {
     dispatch(
       saveShippingInfo({ address, city, postalCode, phoneNumber, country })
     );
-    navigate("/confirm");
+    navigate("/order/confirm");
   };
 
   return (
