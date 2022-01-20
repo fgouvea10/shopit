@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -22,10 +22,23 @@ import "./styles/global.css";
 import "rc-slider/assets/index.css";
 import Shipping from "./components/Cart/Shipping";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
+import Payment from "./components/Cart/Payment";
+import axios from "axios";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 function App() {
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
   useEffect(() => {
     store.dispatch(loadUser());
+
+    async function getStripeApiKey() {
+      const { data } = await axios.get("api/v1/stripeapi");
+      setStripeApiKey(data.stripeApiKey);
+    }
+
+    getStripeApiKey();
   }, []);
 
   return (
@@ -82,6 +95,18 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            {stripeApiKey && (
+              <Route
+                path="/payment"
+                element={
+                  <Elements stripe={loadStripe(stripeApiKey)}>
+                    <ProtectedRoute>
+                      <Payment />
+                    </ProtectedRoute>
+                  </Elements>
+                }
+              />
+            )}
           </Routes>
         </div>
         <Footer />

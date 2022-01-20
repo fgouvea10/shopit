@@ -27,7 +27,7 @@ function ConfirmOrder() {
     };
 
     sessionStorage.setItem("@shopit:orderInfo", JSON.stringify(data));
-    navigate("/");
+    navigate("/payment");
   };
 
   return (
