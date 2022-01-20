@@ -77,15 +77,14 @@ function Header() {
               <span>{user && user.name}</span>
             </Link>
             <div className="dropdown-menu" aria-labelledby="dropDownMenuButton">
-              {(user && user.role !== "admin" && (
-                <Link className="dropdown-item" to="/orders/me">
-                  Orders
-                </Link>
-              )) || (
+              {user && user.role === "admin" && (
                 <Link className="dropdown-item" to="/dashboard">
                   Admin Dashboard
                 </Link>
               )}
+              <Link className="dropdown-item" to="/orders/me">
+                  Orders
+                </Link>
               <Link className="dropdown-item" to="/me">
                 Profile
               </Link>
