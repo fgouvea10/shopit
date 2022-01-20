@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import axios from "axios";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -15,17 +18,15 @@ import ForgotPassword from "./components/ForgotPassword";
 import NewPassword from "./components/NewPassword";
 import Cart from "./components/Cart";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Shipping from "./components/Cart/Shipping";
+import ConfirmOrder from "./components/Cart/ConfirmOrder";
+import Payment from "./components/Cart/Payment";
+import Success from "./components/Cart/Success";
 import { loadUser } from "./actions/userActions";
 import store from "./store";
 
 import "./styles/global.css";
 import "rc-slider/assets/index.css";
-import Shipping from "./components/Cart/Shipping";
-import ConfirmOrder from "./components/Cart/ConfirmOrder";
-import Payment from "./components/Cart/Payment";
-import axios from "axios";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -107,6 +108,14 @@ function App() {
                 }
               />
             )}
+            <Route
+              path="/success"
+              element={
+                <ProtectedRoute>
+                  <Success />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </div>
         <Footer />

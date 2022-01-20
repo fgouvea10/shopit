@@ -11,6 +11,8 @@ import {
   CardCvcElement,
 } from "@stripe/react-stripe-js";
 
+import { createOrder, clearErrors } from "../../actions/orderActions";
+
 import Steps from "../Steps";
 
 const options = {
@@ -32,8 +34,21 @@ function Payment() {
 
   const { user } = useSelector((state) => state.auth);
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
+  const { error } = useSelector((state) => state.newOrder);
 
+  const order = {
+    orderItems: cartItems,
+    shippingInfo,
+  };
   const orderInfo = JSON.parse(sessionStorage.getItem("@shopit:orderInfo"));
+
+  if (orderInfo) {
+    order.itemsPrice = orderInfo.itemsPrice;
+    order.shippingPrice = orderInfo.shippingPrice;
+    order.taxPrice = orderInfo.taxPrice;
+    order.totalPrice = orderInfo.totalPrice;
+  }
+
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
   };
@@ -75,6 +90,13 @@ function Payment() {
         console.log(result.error.message);
       } else {
         if (result.paymentIntent.status === "succeeded") {
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+
+          dispatch(createOrder(order))
+
           navigate("/success");
         } else {
           console.log("There is some issue while payment were proccessing");
@@ -86,7 +108,12 @@ function Payment() {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
 
   return (
     <>

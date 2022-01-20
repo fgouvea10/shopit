@@ -12,7 +12,7 @@ import {
   forgotPasswordReducer,
 } from "./reducers/userReducers";
 import { cartReducer } from "./reducers/cartReducers";
-import { newOrderReducer } from "./reducers/newOrderReducers";
+import { newOrderReducer } from "./reducers/orderReducers";
 
 const reducer = combineReducers({
   products: productsReducer,
