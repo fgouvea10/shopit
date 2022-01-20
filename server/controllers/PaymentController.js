@@ -17,3 +17,9 @@ exports.processPayment = catchAsyncErrors(async (request, response, next) => {
     client_Secret: paymentIntent.client_Secret,
   });
 });
+
+exports.sendStripeApi = catchAsyncErrors(async (request, response, next) => {
+  response.status(200).json({
+    stripeApiKey: process.env.STRIPE_API_KEY,
+  });
+});
