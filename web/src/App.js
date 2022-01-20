@@ -22,6 +22,7 @@ import Shipping from "./components/Cart/Shipping";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
 import Payment from "./components/Cart/Payment";
 import Success from "./components/Cart/Success";
+import ListOrders from "./components/Order/ListOrders";
 import { loadUser } from "./actions/userActions";
 import store from "./store";
 
@@ -113,6 +114,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Success />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/orders/me"
+              element={
+                <ProtectedRoute>
+                  <ListOrders />
                 </ProtectedRoute>
               }
             />
