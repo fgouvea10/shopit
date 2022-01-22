@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
 
 import Search from "../Search";
 import { logout } from "../../actions/userActions";
@@ -10,7 +9,6 @@ function Header() {
   const [keyword, setKeyword] = useState("");
 
   const navigate = useNavigate();
-  const alert = useAlert();
   const dispatch = useDispatch();
 
   const { user, loading } = useSelector((state) => state.auth);
@@ -18,6 +16,8 @@ function Header() {
 
   const handleLogout = () => {
     dispatch(logout());
+    localStorage.removeItem("@shopit:cartItems");
+    localStorage.removeItem("@shopit:shippingInfo");
   };
 
   const searchHandler = (event) => {
@@ -52,9 +52,11 @@ function Header() {
           <span id="cart" className="ml-3">
             Cart
           </span>
-          <span className="ml-1" id="cart_count">
-            {(cartItems.length > 0 && cartItems.length) || ""}
-          </span>
+          {cartItems.length > 0 && (
+            <span className="ml-1" id="cart_count">
+              {(cartItems.length > 0 && cartItems.length) || ""}
+            </span>
+          )}
         </Link>
         {(user && (
           <div className="ml-4 dropdown d-inline">
@@ -83,8 +85,8 @@ function Header() {
                 </Link>
               )}
               <Link className="dropdown-item" to="/orders/me">
-                  Orders
-                </Link>
+                Orders
+              </Link>
               <Link className="dropdown-item" to="/me">
                 Profile
               </Link>
