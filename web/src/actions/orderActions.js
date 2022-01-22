@@ -34,7 +34,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
   }
 };
 
-export const myOrders = (id) => async (dispatch) => {
+export const myOrders = () => async (dispatch) => {
   try {
     dispatch({
       type: MY_ORDERS_REQUEST,
