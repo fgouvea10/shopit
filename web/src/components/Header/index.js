@@ -35,7 +35,7 @@ function Header() {
       <div className="col-12 col-md-3">
         <div className="navbar-brand">
           <Link to="/">
-            <img src="./assets/logo.png" />
+            <img src="assets/logo.png" />
           </Link>
         </div>
       </div>
