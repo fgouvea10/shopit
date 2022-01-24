@@ -293,6 +293,23 @@ function ProductDetails() {
               </div>
             </div>
           </div>
+
+          {product.reviews &&
+            product.reviews.length > 0 &&
+            product.reviews.map((review) => (
+              <div key={review._id} className="review-card my-3">
+                <div className="rating-outer">
+                  <div
+                    className="rating-inner"
+                    style={{ width: `${(review.rating / 5) * 100}%` }}
+                  />
+                  <p className="review_user">by {review.name}</p>
+                  <p className="review_comment">{review.comment}</p>
+
+                  <hr />
+                </div>
+              </div>
+            ))}
         </>
       )}
     </>
