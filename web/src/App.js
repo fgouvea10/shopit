@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { useSelector } from "react-redux";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -24,6 +25,7 @@ import Payment from "./components/Cart/Payment";
 import Success from "./components/Cart/Success";
 import ListOrders from "./components/Order/ListOrders";
 import Dashboard from "./components/Admin/Dashboard";
+import NewProduct from "./components/Admin/NewProduct";
 
 import { loadUser } from "./actions/userActions";
 import store from "./store";
@@ -34,6 +36,8 @@ import AdminProducts from "./components/Admin/Products";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
+
+  const { user, loading } = useSelector((state) => state.auth);
 
   useEffect(() => {
     store.dispatch(loadUser());
@@ -147,8 +151,16 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/admin/product"
+            element={
+              <ProtectedRoute isAdmin={true}>
+                <NewProduct />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
-        <Footer />
+        {!loading && user.role !== "admin" && <Footer />}
       </div>
     </Router>
   );

@@ -40,7 +40,7 @@ function Dashboard() {
                 <div className="card-body">
                   <div className="text-center card-font-size">
                     Total Amount
-                    <br /> <b>amount</b>
+                    <br /> <b>$0</b>
                   </div>
                 </div>
               </div>
