@@ -23,6 +23,8 @@ import ConfirmOrder from "./components/Cart/ConfirmOrder";
 import Payment from "./components/Cart/Payment";
 import Success from "./components/Cart/Success";
 import ListOrders from "./components/Order/ListOrders";
+import Dashboard from "./components/Admin/Dashboard";
+
 import { loadUser } from "./actions/userActions";
 import store from "./store";
 
@@ -127,6 +129,16 @@ function App() {
             />
           </Routes>
         </div>
+        <Routes>
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute isAdmin={true}>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
         <Footer />
       </div>
     </Router>
