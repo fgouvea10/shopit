@@ -98,6 +98,8 @@ function Payment() {
           dispatch(createOrder(order))
 
           navigate("/success");
+          localStorage.removeItem("@shopit:cartItems");
+          localStorage.removeItem("@shopit:shippingInfo");
         } else {
           console.log("There is some issue while payment were proccessing");
         }

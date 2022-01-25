@@ -45,11 +45,9 @@ function UserProfile() {
               <h4>Joined On</h4>
               <p>{String(user.created_at).substring(0, 10)}</p>
 
-              {user.role !== "admin" && (
-                <Link to="/orders/me" className="btn btn-danger btn-block mt-5">
-                  My Orders
-                </Link>
-              )}
+              <Link to="/orders/me" className="btn btn-danger btn-block mt-5">
+                My Orders
+              </Link>
 
               <Link
                 to="/password/update"
