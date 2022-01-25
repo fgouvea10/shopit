@@ -30,6 +30,7 @@ import store from "./store";
 
 import "./styles/global.css";
 import "rc-slider/assets/index.css";
+import AdminProducts from "./components/Admin/Products";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -135,6 +136,14 @@ function App() {
             element={
               <ProtectedRoute isAdmin={true}>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/products"
+            element={
+              <ProtectedRoute isAdmin={true}>
+                <AdminProducts />
               </ProtectedRoute>
             }
           />

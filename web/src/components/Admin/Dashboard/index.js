@@ -1,11 +1,25 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { useDispatch, useSelector } from "react-redux";
 
-import Loader from "../../Loader";
 import Sidebar from "../Sidebar";
+import { getAdminProducts } from "../../../actions/productActions";
 
 function Dashboard() {
+  const dispatch = useDispatch();
+
+  const { products } = useSelector((state) => state.products);
+
+  let outOfStock = 0;
+  products.forEach((product) => {
+    if (product.stock === 0) return outOfStock += 1;
+  });
+
+  useEffect(() => {
+    dispatch(getAdminProducts());
+  }, [dispatch]);
+
   return (
     <>
       <Helmet>
@@ -39,7 +53,7 @@ function Dashboard() {
                 <div className="card-body">
                   <div className="text-center card-font-size">
                     Products
-                    <br /> <b>products</b>
+                    <br /> <b>{products && products.length}</b>
                   </div>
                 </div>
                 <Link
@@ -99,7 +113,7 @@ function Dashboard() {
                 <div className="card-body">
                   <div className="text-center card-font-size">
                     Out of Stock
-                    <br /> <b>1</b>
+                    <br /> <b>{outOfStock}</b>
                   </div>
                 </div>
               </div>

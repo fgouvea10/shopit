@@ -37,6 +37,15 @@ exports.getProducts = catchAsyncErrors(async (request, response, next) => {
   });
 });
 
+exports.getAdminProducts = catchAsyncErrors(async (request, response, next) => {
+  const products = await Product.find();
+
+  response.status(200).json({
+    success: true,
+    products,
+  });
+});
+
 exports.getProduct = catchAsyncErrors(async (request, response, next) => {
   const product = await Product.findById(request.params.id);
 
