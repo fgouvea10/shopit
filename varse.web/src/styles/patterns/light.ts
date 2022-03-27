@@ -14,7 +14,7 @@ export default {
     semanticColorNegative: '#FF5343',
   },
 
-  fontFamily: {
+  fontWeight: {
     regular: 400,
     medium: 500,
     semibold: 600,

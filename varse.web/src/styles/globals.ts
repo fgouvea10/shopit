@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body, input, textarea, select, button {
-    font: ${({ theme }) => theme.fontFamily.regular} ${({ theme }) =>
+    font: ${({ theme }) => theme.fontWeight.regular} ${({ theme }) =>
   theme.fontSize.md} 'Poppins', sans-serif;
     color: ${({ theme }) => theme.colors.texts};
   }

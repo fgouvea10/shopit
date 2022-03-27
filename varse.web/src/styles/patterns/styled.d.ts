@@ -14,7 +14,7 @@ declare module 'styled-components' {
       texts: string;
     };
 
-    fontFamily: {
+    fontWeight: {
       regular: number;
       medium: number;
       semibold: number;
