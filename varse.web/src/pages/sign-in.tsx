@@ -3,17 +3,6 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
-import Logo from 'components/Logo';
-import {
-  Main,
-  Container,
-  CardContent,
-  Title,
-  Divider,
-  FormContainer,
-  NotMember,
-} from 'styles/sign-in';
-
 export default function SignIn() {
   return (
     <>
@@ -21,7 +10,7 @@ export default function SignIn() {
         <title>Sign in - varse</title>
       </Head>
 
-      <Main>
+      {/* <Main>
         <Logo size={32} />
 
         <Container>
@@ -54,7 +43,7 @@ export default function SignIn() {
             </NotMember>
           </CardContent>
         </Container>
-      </Main>
+      </Main> */}
     </>
   );
 }
