@@ -4,6 +4,7 @@ export default {
     primaryColorMid: '#6661FE',
     primaryColorDark: '#0E0E37',
 
+    neutralColor50: '#FFFFFF',
     neutralColor100: '#F2F2FA',
     neutralColor200: '#E1E1E7',
     neutralColor300: '#A8A8B3',
@@ -66,4 +67,11 @@ export default {
     spacing16: '4rem',
     spacing20: '5rem',
   },
+
+  // breakpoints
+  // - 576
+  // - 768
+  // - 992
+  // - 1200
+  // - 1400
 };
