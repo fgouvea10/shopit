@@ -47,7 +47,7 @@ export const Subtitle = styled.h2`
     css`
       font-weight: ${theme.fonts.semibold};
       font-size: ${theme.fontSizes.xl};
-      padding-bottom: 30px;
+      padding-bottom: ${theme.spacing.spacing10};
       text-align: center;
     `};
 `;
